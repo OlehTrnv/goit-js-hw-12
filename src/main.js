@@ -67,16 +67,16 @@ async function handleSubmit(event) {
 
 async function handleLoadMore() {
     currentPage += 1;
+    hideLoadMoreButton();
     showLoader();
 
     try {
         const response = await getImagesByQuery(currentQuery, currentPage);
         hideLoader();
 
-        smoothScroll();
         createGallery(response.hits);
+        smoothScroll();
         checkEndOfCollection(response.totalHits);
-
 
     } catch (error) {
         hideLoader();
